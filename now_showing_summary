@@ -1,0 +1,105 @@
+This gem installs a CLI that allows users to search for Movie Times near a Zip Code that they enter.
+
+The MovieFinderController class is responsible for taking user input and calling the appropriate methods to create movie showtime data from their response and display it to the user via the CLI.
+
+GetRequestUrl class is in charge of taking user input in the form of a ZIP Code and optional arguments for Date and radius (distance of theatre from given ZIP code--default is 5 miles) and returning the proper request url for the Gracenote API.
+
+The Gracenote API gives information about the local movietimes in JSON format.
+
+The GetResponseData class is responsible for taking the return value of the url of a  GetRequestUrl object and returning the response data in JSON format.
+
+The ParseResponseData class is responsible for taking the value of the GetResponseData object's `data` attribute and parsing the data into Movie, Theatre, Genre, and Showtime Objects.
+
+
+
+The Movie class is responsible for keeping track of all the movies available within a certain session of the program.  Movies will have genres, a title, a release_year, a release_date, descriptions (both long and short), a rating, a run_time, and showtimes.  
+Movies should initialize with a title.
+Movies should have .all, .destroy_all, .create and #save methods.
+The #add_showtime method should take in data from the response and create a showtime object that belongs to the movie and the theatre it corresponds to.  
+The #add_genres method should take in the array of genres associated with the movie, find or create the associated genre objects and add them to the @genres array for each instance.
+The #create_from_json method should take in a single javascript object and create a new Movie object using the #add_genres and #add_showtime methods.  (
+Each movie object should have theatres through showtimes.
+
+The Showtime class is responsible for keeping track of all of the showtimes of a given movie nearby.  Showtimes wil have a Theatre, time, details, discount?, and a ticket_url.
+Showtimes should initialize with a theatre and a time.
+Showtimes should have .all, destroy_all, .create and #save methods.
+
+The Genre class is responsible for keeping track of all of the movies that belong to a specific genre.  An #add_movie method should be responsible for adding a Movie to a specific Genre.
+Genres should initialize with a name.
+Genres should have .all, .destroy_all, .create and #save methods.
+
+The Theatre class is responsible for keeping track of all of the theatres that are within the radius specified in the Request to gracenote.
+Theatres should initialize with an id, a name, and a showtimes property set to an empty array.
+Theatres should have .all, .destroy_all, .create and #save methods.
+The #show_movies method should be able to list all of the movies that are playing at a given theatre.  
+The #add_showtime method should take a movie object as an input and add the movie to the theatre object's `showtimes` array.
+Theatres have movies through showtimes.
+
+Movies and Showtimes tests
+when a new Movie is a created it should have a showtimes property set to an empty array.
+A movie can add a showtime into its showtimes array through the #add_showtime method
+Showtimes belong to one Movie.  Showtimes have a #movie= method that identifies them as belonging to a particular movie.  The #movie= method method for each Showtime will return the movie that is showing.
+Showtimes can be added to a movie via the #movie= method on a Showtime.  When a showtime's movie name is set, it will be added to Movie.showtimes array.
+The #movie= method assigns the movie to a particular showtime, so showtime.movie will return the movie.
+The #movie= method does not apply any change if the showtime already has a movie name assigned.
+The #movie= method does not add the showtime to the movie.showtimes array if it's already in the movie.showtimes array.
+
+Movies and Genres Tests
+when a new Movie is created it should have a genres property set to an empty array.
+The Genre Class can keep track of all of the Movies that belong to it.  So Movies can be added to the genre.movies array.
+Movies belong to genres.  An array of genres can be added to the movie.genres property using the #genre= method.
+The #genre= method on the movie class adds the movie to each of the genres in the genres array.
+The #genre= method does not add the movie to a genre if the movie is already in the genre.movies array.
+Movies can be instantiated with an optional genres array.
+
+Movies and Theatres tests
+When a new Theatre is created it should have a movies property set to an empty array.  
+Theatres can add movies and they will appear within the theatre.movies array.
+Movies have many theatres.  The #add_movie method will assign a movie to a Theatre. 
+new_theatre = Theater.new(theatre_id, theatre_name)
+new_theatre.add_movie(new_movie). Expect Movie.theatres to include(new_theatre)
+The #add_movie method will not add a movie to a theatre if the theatre already has that movie.
+
+Theatres and Showtimes tests
+When a new Showtime is created, it should be initialized with a time and a theatre property set to nil. 
+A Showtime has a theatre.  The #theatre= method should set the value of the showtime.theatre property.  
+new_theater = Theater.new(theater_id, theater_name)
+new_showtime = Showtime.new(time).theatre = new_theater 
+new_showtime.theatre should return new_theatre
+The #showtime= method should add the showtime to the theatre's theatre.showtimes array.
+The #showtime= method should add the showtime to the theatre's theatre.showtimes array only if it is not already in the array.
+Showtimes should accept an optional argument for the theatre they belong to.
+
+Theatres and Genres tests
+When a new Theatre is created, it should be initialized with an empty Genres array.
+.genres method returns an array of the genres with movies represented
+.list_movies_by_genre should return an array of movies that match a certain genre.
+
+
+Finable Movies Tests
+
+
+
+
+
+
+
+
+
+
+
+
+
+List Movies Now Playing
+List Nearby Movie Theatres
+List Movie Genres
+List Movie Showtimes by Theatre
+List Movie Showtimes by Genre
+List Movie Showtimes by Movie
+List Movie Showtimes by Theatre and Genre
+
+
+
+
+
+
