@@ -3,15 +3,15 @@
 The dlm_now_showing gem installs a command line interface that allows users to list movies now playing at theatres within a certain radius of a given zip code (default radius is 5 miles).
 
 ### The CLI supports the following commands:
-*list movies (lists movies currently playing within the currently specified radius)
-*list movie (lists nearby movie showtimes of a particular movie)
-*list theatres (lists theatres within the currently specified radius)
-*list theatre (lists movies showtimes at a specified theatre)
-*list genres (lists movie genres of movies playing nearby)
-*list genre (lists movies of a specified genre that are showing nearby)
-*change radius (changes the radius around the given zipcode that the program will look for movie showtimes)
-*change date (changes the date of the showtimes listed)
-*help (displays a list of available commands)
+* list movies (lists movies currently playing within the currently specified radius)
+* list movie (lists nearby movie showtimes of a particular movie)
+* list theatres (lists theatres within the currently specified radius)
+* list theatre (lists movies showtimes at a specified theatre)
+* list genres (lists movie genres of movies playing nearby)
+* list genre (lists movies of a specified genre that are showing nearby)
+* change radius (changes the radius around the given zipcode that the program will look for movie showtimes)
+* change date (changes the date of the showtimes listed)
+* help (displays a list of available commands)
 
 
 ## Installation
