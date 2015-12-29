@@ -12,6 +12,11 @@ describe "Movies and Showtimes" do
     it "cannot add a showtime directly into the showtimes collection" do
       expect(star_wars.showtimes << showtime).to raise_error
     end
+    
+    describe "#showtimes" do
+      star_wars.add_showtime(showtime)
+      expect(star_wars.showtimes).to include(showtime)
+    end
   end
   
   context "Showtimes belong to a Movie" do
