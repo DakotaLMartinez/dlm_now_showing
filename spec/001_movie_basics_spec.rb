@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Movie Basics" do
   context Movie do
-    describe "#initialize with @title" do
+    describe "#initialize" do
       it 'accepts a title for the movie' do
         star_wars = Movie.new("Star Wars")
         expect(star_wars.title).to eq("Star Wars")
