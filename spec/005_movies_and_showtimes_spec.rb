@@ -35,4 +35,66 @@ describe "Movies and Showtimes" do
       end
     end
   end
+  
+  context "Adding a Showtime to a Movie" do
+    describe "#add_showtime" do
+      it "adds the showtime to the movie's showtimes collection" do
+        movie = Movie.new("Star Wars")
+        showtime = Showtime.new("2015-12-28T18:30")
+        movie.add_showtime(showtime)
+        
+        expect(movie.showtimes).to include(showtime)
+      end
+      
+      it "assigns the showtime to the movie" do
+        movie = Movie.new("Star Wars")
+        showtime = Showtime.new("2015-12-28T18:30")
+        movie.add_showtime(showtime)
+        
+        expect(showtime.movie).to eq(movie)
+      end
+      
+      it "does not assign the movie to the showtime if the showtime already has a movie" do
+        movie = Movie.new("Star Wars")
+        showtime = Showtime.new("2015-12-28T18:30")
+        showtime.movie = movie
+        
+        expect(showtime).to_not receive(:movie=)
+        
+        movie.add_showtime(showtime)
+      end
+      
+      it "does not add the showtime to the movie's showtimes collection if the movie already has the showtime inits collection" do
+        movie = Movie.new("Star Wars")
+        showtime = Showtime.new("2015-12-28T18:30")
+        
+        movie.add_showtime(showtime)
+        movie.add_showtime(showtime)
+        
+        expect(movie.showtimes).to include(showtime)
+        expect(movie.showtimes.size).to eq(1)
+      end
+    end
+    
+    describe "Showtime#movie=" do
+      it "uses the Movie#add_showtime method to add the showtime to the movie's showtimes collection" do
+        movie = Movie.new("Star Wars")
+        showtime = Showtime.new("2015-12-28T18:30")
+        
+        expect(movie).to receive(:add_showtime)
+        
+        showtime.movie = movie
+      end
+    end
+  end
+  
+  context "initializing a showtime with a movie" do
+    it "new showtimes accept an optional argument for the movie" do
+      movie = Movie.new("Star Wars")
+      showtime = Showtime.new("2015-12-28T18:30", movie)
+      
+      expect(movie.showtimes).to include(showtime)
+      expect(showtime.movie).to eq(movie)
+    end
+  end
 end
