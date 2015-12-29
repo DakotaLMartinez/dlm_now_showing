@@ -2,16 +2,20 @@ require "spec_helper"
 
 describe "Theatre Basics" do
   context "Theatre" do
-    describe "#intializes with an id" do 
-      theatre = Theatre.new(7792)
-      
-      expect(theater.id).to eq(7792)
+    describe "#intialize" do 
+      it "sets the id property of the theatre" do
+        theatre = Theatre.new(7792)
+        
+        expect(theater.id).to eq(7792)
+      end
     end
     
     describe "#name" do
-      theater = Theatre.new(7792).name = "AMC Loews Marina 6"
-      
-      expect(theater.name).to eq("AMC Loews Marina 6")
+      it "sets the name property of the theatre" do
+        theater = Theatre.new(7792).name = "AMC Loews Marina 6"
+        
+        expect(theater.name).to eq("AMC Loews Marina 6")
+      end
     end
     
     describe ".all" do 

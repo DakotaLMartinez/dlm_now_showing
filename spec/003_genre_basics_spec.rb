@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe "Genre Basics" do
   context Genre do
-    describe "#initializes with a name" do
-      genre = Genre.new("Comedy") 
-      
-      expect(genre.name).to eq("Comedy")
+    describe "#initialize" do
+      it "sets the name of the genre" do
+        genre = Genre.new("Comedy") 
+        
+        expect(genre.name).to eq("Comedy")
+      end
     end
     
     describe ".all" do 
