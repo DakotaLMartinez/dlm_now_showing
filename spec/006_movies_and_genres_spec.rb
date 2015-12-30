@@ -1,76 +1,68 @@
 require 'spec_helper'
 
 describe "Movies and Genres" do
+  let!(:comedy) { Genre.new("Comedy") }
+  let!(:sisters) { Movie.new("Sisters") }
   context "Genres have many movies" do
     it "initializes with a movies property set to an empty array" do
-      genre = Genre.new("Comedy")
-      
-      expect(genre.movies).to eq([])
+      expect(comedy.movies).to eq([])
     end
     
     it "cannot push a movie directly into the genre's movie collection" do
-      genre = Genre.new("Comedy")
-      movie = Movie.new("Sisters")
-      
-      expect(genre.movies << movie).to raise_error
+      expect(comedy.movies << sisters).to raise_error
+    end
+    describe "#add_movie" do 
+      it "adds a movie to the genre's movie collection" do 
+        comedy.add_movie(sisters)
+        expect(comedy.movies).to include(sisters)
+      end
+    end
+    describe "#movies" do
+      it "returns the array of movies belonging to a genre" do 
+        comedy.add_movie(sisters)
+        expect(comedy.movies).to eq([sisters])
+      end
     end
   end
   
   context "Movies have one or many genres" do
     it "initializes with a genres property set to an empty array" do
-      movie = Movie.new("Sisters")
-      
-      expect(movie.genres).to eq([])
+      expect(sisters.genres).to eq([])
     end
     
     it "cannot push a genre directly into the movie's genre collection" do
-      genre = Genre.new("Comedy")
-      movie = Movie.new("Sisters")
-      
-      expect(movie.genres << genre).to raise_error
+      expect(sisters.genres << comedy).to raise_error
     end
     
     describe "#add_genre" do
       it "accepts a genre for a movie" do
-        genre = Genre.new("Comedy")
-        movie = Movie.new("Sisters")
+        sisters.add_genre(comedy)
         
-        movie.add_genre(genre)
-        
-        expect(movie.genres).to include(genre)
-        expect(movie.genres.size).to eq(1)
+        expect(sisters.genres).to include(comedy)
+        expect(sisters.genres.size).to eq(1)
       end
       
       it "adds the movie to the genre's movie collection" do
-        genre = Genre.new("Comedy")
-        movie = Movie.new("Sisters")
+        sisters.add_genre(comedy)
         
-        movie.add_genre(genre)
-        
-        expect(genre.movies).to include(movie)
-        expect(genre.movies.size).to eq(1)
+        expect(comedy.movies).to include(sisters)
+        expect(comedy.movies.size).to eq(1)
       end
       
       it "does not add the movie to the genre's movie collection if it already exists within the collection" do
-        genre = Genre.new("Comedy")
-        movie = Movie.new("Sisters")
+        sisters.add_genre(comedy)
+        sisters.add_genre(comedy)
         
-        movie.add_genre(genre)
-        movie.add_genre(genre)
-        
-        expect(genre.movies).to include(movie)
-        expect(genre.movies.size).to eq(1)
+        expect(comedy.movies).to include(sisters)
+        expect(comedy.movies.size).to eq(1)
       end
       
       it "does not add the genre to the movie's genres collection if it already exists within the collection" do
-        genre = Genre.new("Comedy")
-        movie = Movie.new("Sisters")
+        sisters.add_genre(comedy)
+        sisters.add_genre(comedy)
         
-        movie.add_genre(genre)
-        movie.add_genre(genre)
-        
-        expect(movie.genres).to include(genre)
-        expect(movie.genres.size).to eq(1)
+        expect(sisters.genres).to include(comedy)
+        expect(sisters.genres.size).to eq(1)
       end
     end
   end
