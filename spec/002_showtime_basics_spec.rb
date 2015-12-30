@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Showtime Basics" do
   context Showtime do
     let!(:showtime) { Showtime.new("2015-12-28T18:30") }
-    let!(:theatre) { Theater.new(7792) }
+    let!(:theatre) { Theatre.new(7792) }
     describe "#initialize" do
       it "accepts a time for the showtime" do
         expect{Showtime.new("2015-12-28T18:30")}.to_not raise_error
@@ -12,7 +12,7 @@ describe "Showtime Basics" do
     end
     
     describe "#theatre=" do
-      it "sets the theatre of the showtime" do
+      it "assigns the showtime to a theatre" do
         showtime.theatre = theatre
         
         expect(showtime.theatre).to eq(theatre)
@@ -36,11 +36,11 @@ describe "Showtime Basics" do
       end
     end
     
-    describe "#discount?" do
+    describe "#discount" do
       it "tells whether the showtime is a discount or not" do
-        showtime.discount = true
+        showtime.discount = "true"
         
-        expect(showtime.discount?).to be_truthy
+        expect(showtime.discount).to eq("true")
       end
     end
     

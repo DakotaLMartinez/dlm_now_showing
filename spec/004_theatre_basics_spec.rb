@@ -6,16 +6,17 @@ describe "Theatre Basics" do
       it "sets the id property of the theatre" do
         theatre = Theatre.new(7792)
         
-        expect{Theater.new(7792)}.to_not raise_error
-        expect(theater.id).to eq(7792)
+        expect{Theatre.new(7792)}.to_not raise_error
+        expect(theatre.id).to eq(7792)
       end
     end
     
     describe "#name" do
       it "sets the name property of the theatre" do
-        theater = Theatre.new(7792).name = "AMC Loews Marina 6"
+        theatre = Theatre.new(7792)
+        theatre.name = "AMC Loews Marina 6"
         
-        expect(theater.name).to eq("AMC Loews Marina 6")
+        expect(theatre.name).to eq("AMC Loews Marina 6")
       end
     end
     
