@@ -14,8 +14,10 @@ describe "Movies and Showtimes" do
     end
     
     describe "#showtimes" do
-      star_wars.add_showtime(showtime)
-      expect(star_wars.showtimes).to include(showtime)
+      it "returns an array of showtimes of the given movie" do 
+        star_wars.add_showtime(showtime)
+        expect(star_wars.showtimes).to include(showtime)
+      end
     end
   end
   
@@ -35,7 +37,7 @@ describe "Movies and Showtimes" do
     end
   end
   
-  context "Adding a Showtime to a Movie" do
+  context "Movies -- adding showtimes" do
     describe "#add_showtime" do
       it "adds the showtime to the movie's showtimes collection" do
         star_wars.add_showtime(showtime)
