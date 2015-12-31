@@ -1,3 +1,4 @@
+require 'pry'
 require 'spec_helper'
 
 describe "Movies and Showtimes" do
@@ -10,7 +11,7 @@ describe "Movies and Showtimes" do
     end
     
     it "cannot add a showtime directly into the showtimes collection" do
-      expect(star_wars.showtimes << showtime).to raise_error
+      expect{star_wars.showtimes << showtime}.to raise_error(RuntimeError)
     end
     
     describe "#showtimes" do

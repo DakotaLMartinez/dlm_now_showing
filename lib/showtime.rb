@@ -1,7 +1,8 @@
 require_relative "../concerns/resources"
 
 class Showtime
-  attr_accessor :time, :theatre, :movie, :details, :discount, :ticket_url
+  attr_accessor :time, :theatre, :details, :discount, :ticket_url
+  attr_reader :movie
   
   @@all = []
   
@@ -14,7 +15,14 @@ class Showtime
   extend Concerns::Destroyable
   include Concerns::Savable
     
-  def initialize(time)
+  def initialize(time, movie=nil)
     @time = time
+    self.movie = movie if movie
+  end
+  
+  def movie=(movie)
+    @movie = movie
+    movie.add_showtime(self)
+    self
   end
 end
