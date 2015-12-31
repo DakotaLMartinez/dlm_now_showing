@@ -2,7 +2,6 @@ require_relative "../concerns/resources"
 
 class Movie
   attr_accessor :title
-  attr_reader :showtimes
   
   @@all = []
   
@@ -15,9 +14,17 @@ class Movie
   extend Concerns::Destroyable
   include Concerns::Savable
   
-  def initialize(title)
+  def initialize(title,genres=nil)
      @title = title 
      @showtimes = []
+     if genres
+       @genres = []
+       genres.each do |genre|
+         add_genre(Genre.find_or_create_by_name(genre))
+       end
+     else
+       @genres = []
+     end
   end
   
   def add_showtime(showtime)
@@ -28,6 +35,16 @@ class Movie
   
   def showtimes
     @showtimes.clone.freeze
+  end
+  
+  def genres
+    @genres.clone.freeze
+  end
+  
+  def add_genre(genre)
+    @genres << genre if @genres.none? { |g| g == genre }
+    genre.add_movie(self) if genre.movies.none? { |m| m == self }
+    self
   end
   
 end

@@ -1,3 +1,4 @@
+require 'pry'
 require 'spec_helper'
 
 describe "Movies and Genres" do
@@ -9,7 +10,7 @@ describe "Movies and Genres" do
     end
     
     it "cannot push a movie directly into the genre's movie collection" do
-      expect(comedy.movies << sisters).to raise_error
+      expect{comedy.movies << sisters}.to raise_error(RuntimeError)
     end
     describe "#add_movie" do 
       it "adds a movie to the genre's movie collection" do 
@@ -31,7 +32,7 @@ describe "Movies and Genres" do
     end
     
     it "cannot push a genre directly into the movie's genre collection" do
-      expect(sisters.genres << comedy).to raise_error
+      expect{sisters.genres << comedy}.to raise_error(RuntimeError)
     end
     
     describe "#add_genre" do
@@ -71,7 +72,7 @@ describe "Movies and Genres" do
     it "new movies accept an optional argument for genres as an array of strings" do
       genres = ["Adventure", "Historical drama", "Action"]
       movie = Movie.new("In the Heart of the Sea", genres)
-      genre_objects = genres.collect { |genre| Genre.new(genre) }
+      genre_objects = genres.collect { |genre| Genre.find_or_create_by_name(genre) }
       
       expect(movie.genres).to eq(genre_objects)
       genre_objects.each do |genre|
