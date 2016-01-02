@@ -17,6 +17,7 @@ class Movie
   def initialize(title,genres=nil)
      @title = title 
      @showtimes = []
+     @theatres = []
      if genres
        @genres = []
        genres.each do |genre|
@@ -45,6 +46,15 @@ class Movie
     @genres << genre if @genres.none? { |g| g == genre }
     genre.add_movie(self) if genre.movies.none? { |m| m == self }
     self
+  end
+  
+  def theatres
+    @theatres.clone.freeze
+  end
+  
+  def add_theatre(theatre)
+    @theatres << theatre if @theatres.none? { |t| t == theatre }
+    theatre.add_movie(self)
   end
   
 end

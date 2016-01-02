@@ -2,12 +2,16 @@ require 'spec_helper'
 
 describe "Showtime Basics" do
   context Showtime do
-    let!(:showtime) { Showtime.new("2015-12-28T18:30") }
+    let!(:sisters) { Movie.new("Sisters") }
     let!(:theatre) { Theatre.new(7792) }
+    let!(:showtime) { Showtime.new(sisters, "2015-12-28T18:30", theatre) }
+    
     describe "#initialize" do
-      it "accepts a time for the showtime" do
-        expect{Showtime.new("2015-12-28T18:30")}.to_not raise_error
+      it "accepts a movie, time, and theatre for the showtime" do
+        expect{Showtime.new(sisters, "2015-12-28T18:30", theatre)}.to_not raise_error(RuntimeError)
         expect(showtime.time).to eq("2015-12-28T18:30")
+        expect(showtime.movie).to eq(sisters)
+        expect(showtime.theatre).to eq(theatre)
       end
     end
     
@@ -79,7 +83,7 @@ describe "Showtime Basics" do
     
     describe ".create" do
       it "initializes and saves the showtime" do
-        new_showtime = Showtime.create("2015-12-28T18:30")
+        new_showtime = Showtime.create(sisters, "2015-12-28T18:30", theatre)
         
         expect(Showtime.all).to include(new_showtime)
       end

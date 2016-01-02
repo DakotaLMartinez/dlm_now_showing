@@ -11,18 +11,29 @@ class Showtime
   end
   
   extend Concerns::Findable
-  extend Concerns::Creatable
   extend Concerns::Destroyable
   include Concerns::Savable
     
-  def initialize(time, movie=nil)
+  def initialize(movie, time, theatre)
     @time = time
-    self.movie = movie if movie
+    self.movie = movie
+    self.theatre = theatre
+    movie.add_theatre(theatre)
+  end
+  
+  def self.create(movie, time, theatre)
+    self.new(movie, time, theatre).save
   end
   
   def movie=(movie)
     @movie = movie
     movie.add_showtime(self)
+    self
+  end
+  
+  def theatre=(theatre)
+    @theatre = theatre
+    # theatre.add_showtime(self) if 
     self
   end
 end
