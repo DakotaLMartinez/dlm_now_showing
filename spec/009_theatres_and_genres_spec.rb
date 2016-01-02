@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Theatres and Genres" do 
   let!(:star_wars) { Movie.new("Star Wars",["Science fiction", "Adventure", "Fantasy", "Action"]) }
@@ -66,7 +67,6 @@ describe "Theatres and Genres" do
       it "maintains uniqueness of theatres" do 
         new_showtime = Showtime.new(good_dinosaur, "2015-12-28T16:00", theatre2)
         
-        # expect(comedy.theatres).to include(theatre2, theatre3)
         expect(comedy.theatres.size).to eq(2)
       end
     end

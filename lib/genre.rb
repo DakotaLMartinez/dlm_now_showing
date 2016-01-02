@@ -36,6 +36,7 @@ class Genre
         @theatres << showtime.theatre if @theatres.none? { |t| t == showtime.theatre }
       end
     end
+    @theatres
   end
     
 end
