@@ -58,6 +58,10 @@ describe "Theatres and Genres" do
       horror = Genre.new("Horror")
       expect(horror.theatres).to eq([])
     end
+    it "cannot push a theatre directly into the genre's theatres collection" do
+      theatre = Theatre.new(1111)
+      expect{sci_fi.theatres << theatre}.to raise_error(RuntimeError)
+    end
     
     describe "#theatres" do
       it "returns a list of theatres that are playing movies of a given genre" do

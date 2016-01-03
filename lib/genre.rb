@@ -19,6 +19,7 @@ class Genre
     @name = name
     @movies = []
     @theatres = []
+    @showtimes = []
   end
   
   def movies
@@ -36,7 +37,16 @@ class Genre
         @theatres << showtime.theatre if @theatres.none? { |t| t == showtime.theatre }
       end
     end
-    @theatres
+    @theatres.clone.freeze
+  end
+  
+  def showtimes
+    self.movies.each do |movie|
+      movie.showtimes.each do |showtime|
+        @showtimes << showtime if @showtimes.none? { |t| t == showtime }
+      end
+    end
+    @showtimes.clone.freeze
   end
     
 end

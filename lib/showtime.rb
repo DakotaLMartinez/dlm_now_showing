@@ -36,4 +36,9 @@ class Showtime
     # theatre.add_showtime(self) if 
     self
   end
+  
+  def genres
+    self.movie.genres
+  end
+  
 end
