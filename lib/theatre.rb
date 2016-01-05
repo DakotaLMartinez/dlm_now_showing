@@ -1,8 +1,8 @@
 require_relative "../concerns/resources"
 
 class Theatre
-  attr_accessor :id, :name
-  attr_reader :showtimes
+  attr_accessor :name
+  attr_reader :id, :showtimes
   
   @@all = []
   
@@ -15,11 +15,12 @@ class Theatre
   extend Concerns::Destroyable
   include Concerns::Savable
   
-  def initialize(id)
+  def initialize(id, name=nil)
     @id = id
     @showtimes = []
     @movies = []
     @genres = []
+    self.name = name if name != nil
   end
   
   # def add_showtime(showtime)
