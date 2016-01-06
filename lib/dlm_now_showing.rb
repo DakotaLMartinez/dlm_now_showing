@@ -2,10 +2,10 @@
 require 'pry'
 
 module DlmNowShowing
-  class GetRequestUrl
+  class RequestUrl
     attr_reader :url
     def initialize(zip_code)
-       @url = "http://data.tmsapi.com/v1.1/movies/showings?startDate=#{Time.now.strftime("%Y-%m-%d")}&zip=#{zip_code.to_s}&api_key=ju2ketuuttqvsch9jzjstbn8" 
+       @url = "http://data.tmsapi.com/v1.1/movies/showings?startDate=#{Time.now.strftime("%Y-%m-%d")}&zip=#{zip_code.to_s}&api_key=#{ENV['API_KEY']}" 
     end
   end
 end
