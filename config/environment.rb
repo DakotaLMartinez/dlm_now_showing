@@ -1,8 +1,8 @@
 require 'bundler'
+require 'dotenv'
+require 'httparty'
 
 Bundler.require
-
-require 'dotenv'
 Dotenv.load
 
 module Concerns
