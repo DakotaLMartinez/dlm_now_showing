@@ -25,6 +25,12 @@ context "Findable Showtimes" do
     end
   end
   
+  describe ".find_by_movie_theatre_and_time" do 
+    it "finds showtimes by movie, theatre and time" do
+      expect(Showtime.find_by_movie_theatre_and_time(star_wars, "2015-12-28T18:30", theatre)).to eq(showtime1)
+    end
+  end
+  
   describe "find_or_create_by_movie_theatre_and_time" do
     it "finds or creates a showtime maintaining the uniqueness of showtimes by movie, theatre" do 
       expect(Showtime.find_or_create_by_movie_theatre_and_time(star_wars, "2015-12-28T18:30", theatre)).to eq(showtime1)
