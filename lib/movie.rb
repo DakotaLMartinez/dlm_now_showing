@@ -9,7 +9,7 @@ class Movie
     @@all
   end
   
-  extend Concerns::Findable
+  # extend Concerns::Findable
   extend Concerns::Creatable
   extend Concerns::Destroyable
   include Concerns::Savable
@@ -29,7 +29,7 @@ class Movie
   end
   
   def add_showtime(showtime)
-    @showtimes << showtime if @showtimes.none? { |time| time = showtime }
+    @showtimes << showtime if @showtimes.none? { |time| time == showtime }
     showtime.movie = self if showtime.movie != self
     self
   end
@@ -55,6 +55,18 @@ class Movie
   def add_theatre(theatre)
     @theatres << theatre if @theatres.none? { |t| t == theatre }
     theatre.add_movie(self)
+  end
+  
+  def self.create(title, genres=[])
+    self.new(title, genres).save
+  end
+  
+  def self.find_by_title(title)
+    self.all.detect { |movie| movie.title == title }
+  end
+  
+  def self.find_or_create_by_title(title,genres=[])
+    self.find_by_title(title) ? self.find_by_title(title) : self.create(title,genres)
   end
   
 end

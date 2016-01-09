@@ -10,8 +10,8 @@ class Theatre
     @@all
   end
   
-  extend Concerns::Findable
-  extend Concerns::Creatable
+  # extend Concerns::Findable
+  # extend Concerns::Creatable
   extend Concerns::Destroyable
   include Concerns::Savable
   
@@ -55,6 +55,22 @@ class Theatre
   def add_genre(genre)
     @genres << genre if @genres.none? { |g| g == genre }
     self
+  end
+  
+  def self.find_by_name(name)
+    self.all.select { |t| t.name == name }
+  end
+  
+  def self.find_by_id(id)
+    self.all.detect { |t| t.id == id }
+  end
+  
+  def self.find_or_create_by_id_and_name(id, name)
+    self.find_by_id(id) ? self.find_by_id(id) : self.create(id, name)
+  end
+  
+  def self.create(id, name=nil)
+    self.new(id,name).save
   end
   
 end
