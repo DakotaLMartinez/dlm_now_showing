@@ -58,7 +58,7 @@ class Theatre
   end
   
   def self.find_by_name(name)
-    self.all.select { |t| t.name == name }
+    self.all.select { |t| t.name.downcase.match(name.downcase) }
   end
   
   def self.find_by_id(id)

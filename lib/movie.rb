@@ -65,6 +65,10 @@ class Movie
     self.all.detect { |movie| movie.title == title }
   end
   
+  def self.search_by_title(title)
+    self.all.select { |movie| movie.title.downcase.match(title.downcase) }
+  end
+  
   def self.find_or_create_by_title(title,genres=[])
     self.find_by_title(title) ? self.find_by_title(title) : self.create(title,genres)
   end

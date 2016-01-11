@@ -48,5 +48,9 @@ class Genre
     end
     @showtimes.clone.freeze
   end
+  
+  def self.find_by_name(name)
+    self.all.detect { |g| g.name.downcase.match(name.downcase) }
+  end
     
 end
