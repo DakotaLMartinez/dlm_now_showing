@@ -17,7 +17,7 @@ describe "DlmNowShowing" do
   end
   
   context "MovieImporter" do 
-    let!(:movie_importer) { DlmNowShowing::MovieImporter.new("http://dakotaleemartinez.com/movie-data-for-test.json") }
+    let!(:movie_importer) { DlmNowShowing::MovieImporter.new("http://dakotaleedev.webfactional.com/test.json") }
     let!(:response) { movie_importer.response }
      describe "#initialize" do 
       it "accepts a url to parse movie information in JSON format" do 
@@ -29,8 +29,8 @@ describe "DlmNowShowing" do
         it "creates a new movie for each of the objects in the JSON response, maintaining uniqueness of movies by title" do
           movie_importer.import
           
-          expect(response.size).to eq(37)
-          expect(Movie.all.size).to eq(36)
+          expect(response.size).to eq(46)
+          expect(Movie.all.size).to eq(46)
           # clear_all
         end
         
@@ -53,8 +53,8 @@ describe "DlmNowShowing" do
           # while the showtimes in the program are 45 (the sum) for each (the program 
           # recognizes that the showtimes both belong to the same movie)
           # binding.pry
-          expect(showtimes_in_data).to eq([45, 16, 45, 33, 27, 2, 10, 7, 29, 17, 2, 9, 86, 45, 37, 45, 4, 11, 8, 8, 5, 3, 7, 9, 1, 4, 8, 2, 1, 1, 1, 2, 1, 1, 2, 2, 5])
-          expect(showtimes_in_program).to eq([45, 16, 45, 33, 27, 2, 10, 7, 29, 17, 2, 9, 78, 41, 39, 37, 3, 11, 8, 39, 5, 3, 7, 9, 1, 4, 8, 2, 1, 1, 1, 2, 1, 1, 2, 2, 5])
+          expect(showtimes_in_data).to eq([72, 26, 5, 37, 4, 13, 14, 25, 3, 8, 25, 30, 30, 49, 23, 52, 42, 29, 10, 4, 1, 1, 2, 1, 17, 6, 13, 5, 5, 5, 5, 3, 3, 3, 3, 2, 5, 6, 6, 6, 8, 5, 1, 2, 4, 1])
+          expect(showtimes_in_program).to eq([72, 26, 5, 37, 4, 13, 14, 25, 3, 8, 20, 22, 30, 44, 23, 48, 37, 24, 10, 4, 1, 1, 2, 1, 17, 6, 13, 5, 5, 5, 5, 3, 3, 3, 3, 2, 5, 6, 6, 6, 8, 5, 1, 2, 4, 1])
           # clear_all
         end
         
@@ -79,7 +79,7 @@ describe "DlmNowShowing" do
             end
           end
           expect(genres_in_data.size).to eq(genres_in_program.size)
-          expect(Genre.all.size).to eq(14)
+          expect(Genre.all.size).to eq(19)
           # binding.pry
         end
             

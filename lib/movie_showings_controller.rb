@@ -88,11 +88,12 @@ class MovieShowingsController
   end
   
   def list_showtimes_by_movie(movies)
-    print "Choose a movie (by number) to list nearby showtimes: "
+    print "Choose a movie (by number) to list nearby showtimes (type 'home' to go back to main prompt): "
     input = gets.chomp
     if input.to_i.between?(1,movies.size)
       movie = movies[input.to_i-1]
       display_all_showtimes(movie)
+      list_showtimes_by_movie(movies)
     elsif input.downcase == "exit"
       "exit"
     elsif input.downcase == "home"
@@ -260,7 +261,7 @@ class MovieShowingsController
     elsif command.downcase == "genre"
       return "exit" if find_genre == "exit"
       ask_for_command
-    elsif command.downcase == "theatres"
+    elsif command.downcase == "theatres" || command.downcase == "theaters"
       list_theatres(Theatre.all)
       return "exit" if list_showtimes_by_theatre(Theatre.all) == "exit"
       ask_for_command

@@ -101,5 +101,11 @@ List Movie Showtimes by Theatre and Genre
 
 
 
+movies
+theatres
+genres
 
+The Command line interface will greet the user and ask them for a zip code.
+It will ask if the default 5 mile radius for theatres is okay.  If not, it will accept input for another integer for the radius (from 1-100)
+It will ask if the default date of today's date is okay, if not, it will prompt the user to input a date in the following format 2016-01-10
 

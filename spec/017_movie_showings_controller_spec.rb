@@ -2,7 +2,7 @@ require "spec_helper"
 
 context "MovieShowingsController" do 
   let!(:movie_showings_controller) { MovieShowingsController.new }
-  let!(:movie_importer) { DlmNowShowing::MovieImporter.new("http://dakotaleemartinez.com/movie-data-for-test.json") }
+  let!(:movie_importer) { DlmNowShowing::MovieImporter.new("http://dakotaleedev.webfactional.com/test.json") }
   describe "#initialize" do 
     it "initializes with a searches property set to an empty array" do 
       expect(MovieShowingsController.new.searches).to eq([])
@@ -78,7 +78,8 @@ context "MovieShowingsController" do
     end
     
     it "accepts an optional argument for request url allowing the method to accept a url for test data" do 
-      expect(DlmNowShowing::MovieImporter).to receive(:new).with("http://dakotaleemartinez.com/movie-data-for-test.json").and_return(DlmNowShowing::MovieImporter.new("http://dakotaleemartinez.com/movie-data-for-test.json"))
+      movie_showings_controller.call("http://dakotaleedev.webfactional.com/test.json")
+      expect(DlmNowShowing::MovieImporter).to receive(:new).with("http://dakotaleedev.webfactional.com/test.json").and_return(DlmNowShowing::MovieImporter.new("http://dakotaleedev.webfactional.com/test.json"))
     end
     
   end

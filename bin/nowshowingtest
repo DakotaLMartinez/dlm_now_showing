@@ -2,4 +2,4 @@
 
 require_relative "../config/environment"
 
-MovieShowingsController.new.call("http://dakotaleemartinez.com/movie-data-for-test.json")
+MovieShowingsController.new.call("http://cligem.dakotaleedev.webfactional.com/video-test.json")
