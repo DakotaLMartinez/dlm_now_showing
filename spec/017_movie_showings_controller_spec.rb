@@ -78,7 +78,6 @@ context "MovieShowingsController" do
     end
     
     it "accepts an optional argument for request url allowing the method to accept a url for test data" do 
-      movie_showings_controller.call("http://dakotaleedev.webfactional.com/test.json")
       expect(DlmNowShowing::MovieImporter).to receive(:new).with("http://dakotaleedev.webfactional.com/test.json").and_return(DlmNowShowing::MovieImporter.new("http://dakotaleedev.webfactional.com/test.json"))
     end
     
