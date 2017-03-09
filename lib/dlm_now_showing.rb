@@ -5,6 +5,7 @@ module DlmNowShowing
   class RequestUrl
     attr_reader :url
     def initialize(zip_code,radius="5", start_date=Time.now.strftime("%Y-%m-%d"))
+       raise NameError, 'Remember to add your gracenote OnConnect API_KEY to .env file. Visit: http://developer.tmsapi.com/member/register to register and get your API key.' unless ENV['API_KEY']
        @url = "http://data.tmsapi.com/v1.1/movies/showings?startDate=#{start_date}&zip=#{zip_code.to_s}&radius=#{radius.to_s}&api_key=#{ENV['API_KEY']}" 
     end
   end
